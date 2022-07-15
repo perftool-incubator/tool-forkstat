@@ -1,0 +1,45 @@
+#!/bin/bash
+exec >forkstat-start-stderrout.txt
+exec 2>&1
+
+echo "args: $@"
+echo "pwd: `/bin/pwd`"
+echo "hostname: `hostname`"
+
+events="all"
+
+longopts="events:"
+opts=$(getopt -q -o "" --longoptions "$longopts" -n "getopt.sh" -- "$@");
+if [ $? -ne 0 ]; then
+    printf -- "\tUnrecognized option specified\n\n"
+    exit 1
+fi
+eval set -- "$opts";
+while true; do
+    case "$1" in
+        --events)
+            shift;
+            events=${1}
+            echo "events=${events}"
+            shift;
+            ;;
+        --)
+            shift;
+            break
+            ;;
+        *)
+            echo "Invalid option: $1"
+            exit 1
+    esac
+done
+
+/bin/rm -f forkstat-pids.txt
+
+
+cmd_path=$( command -v forkstat )
+cmd="$cmd_path -e ${events} -X -S"
+echo "About to run: ${cmd}"
+${cmd} > forkstat-stderrout.txt
+forkstat_pid=$!
+echo "${forkstat_pid}" >> forkstat-pids.txt
+echo "forkstat pid is ${forkstat_pid}"

@@ -1,0 +1,21 @@
+#!/bin/bash
+exec >forkstat-stop-stderrout.txt
+exec 2>&1
+
+echo "args: $@"
+echo "hostname: `hostname`"
+
+if [ -e forkstat-pids.txt ]; then
+    while read pid; do
+	echo "killing ${pid}"
+        kill -s SIGINT $pid
+    done < forkstat-pids.txt
+
+    xz --verbose --threads=0 forkstat-stderrout.txt
+else
+    echo "Could not find forkstat-pids.txt"
+    echo "PWD: `/bin/pwd`"
+    echo "LS:"
+    /bin/ls -l
+    exit 1
+fi
