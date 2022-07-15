@@ -1,0 +1,38 @@
+{
+    "workshop": {
+        "schema": {
+            "version": "2020.03.02"
+        }
+    },
+    "userenvs": [
+        {
+            "name": "default",
+            "requirements": [
+                "distro-deps",
+                "forkstat"
+            ]
+        }
+    ],
+    "requirements": [
+    {
+        "name": "distro-deps",
+        "type": "distro",
+        "distro_info": {
+            "packages": [
+                "make",
+                "gcc"
+            ]
+        }
+    },
+    {
+        "name": "forkstat",
+        "type": "manual",
+        "manual_info": {
+            "commands": [
+                "git clone https://github.com/ColinIanKing/forkstat.git /root/forkstat",
+                "cd /root/forkstat; make && make install"
+            ]
+        }
+    }
+    ]
+}
