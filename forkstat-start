@@ -39,7 +39,7 @@ done
 cmd_path=$( command -v forkstat )
 cmd="$cmd_path -e ${events} -X -S"
 echo "About to run: ${cmd}"
-${cmd} > forkstat-stderrout.txt
+${cmd} > forkstat-stderrout.txt &
 forkstat_pid=$!
 echo "${forkstat_pid}" >> forkstat-pids.txt
 echo "forkstat pid is ${forkstat_pid}"
