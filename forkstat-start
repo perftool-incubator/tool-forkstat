@@ -35,13 +35,13 @@ done
 
 /bin/rm -f forkstat-pids.txt
 
-# Record the UTC date for post-processing (forkstat only outputs HH:MM:SS)
-date -u +%Y-%m-%d > forkstat-date.txt
+# Record the local date for post-processing (forkstat outputs HH:MM:SS in local time)
+date +%Y-%m-%d > forkstat-date.txt
 
 cmd_path=$( command -v forkstat )
 cmd="$cmd_path -e ${events} -X -S"
 echo "About to run: ${cmd}"
-${cmd} > forkstat-stderrout.txt &
+${cmd} > forkstat-stderrout.txt 2>&1 &
 forkstat_pid=$!
 echo "${forkstat_pid}" >> forkstat-pids.txt
 echo "forkstat pid is ${forkstat_pid}"
