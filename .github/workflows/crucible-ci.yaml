@@ -27,6 +27,7 @@ jobs:
             .github/workflows/run-crucible-tracking.yaml
             .github/workflows/crucible-ci.yaml
             .github/workflows/fork-check.yaml
+            .gitignore
             docs/**
       - name: Display changes
         run: echo '${{ toJSON(steps.filter.outputs) }}' | jq .
