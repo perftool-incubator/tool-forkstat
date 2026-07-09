@@ -7,7 +7,7 @@ echo "hostname: `hostname`"
 
 if [ -e forkstat-pids.txt ]; then
     while read pid; do
-	echo "killing ${pid}"
+        echo "killing ${pid}"
         kill -s SIGINT $pid
     done < forkstat-pids.txt
 
