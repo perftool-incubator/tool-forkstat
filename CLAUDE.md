@@ -1,7 +1,7 @@
 # Forkstat Tool
 
 ## Purpose
-Monitors process fork(), exec(), and exit() activity during benchmark execution using the upstream forkstat utility.
+Monitors process fork(), exec(), exit(), and clone() activity during benchmark execution using the upstream forkstat utility.
 
 ## Languages
 - Bash: collection scripts (`forkstat-start`, `forkstat-stop`)
@@ -15,6 +15,8 @@ Monitors process fork(), exec(), and exit() activity during benchmark execution 
 | `forkstat-post-process` | Converts raw forkstat output to crucible metrics |
 | `rickshaw.json` | Rickshaw integration: endpoint allow/block lists, file deployment, post-process script |
 | `workshop.json` | Engine image build: compiles forkstat from source |
+| `tool-metadata.json` | Machine-readable description and CDM-indexed status (consumed by `crucible tools list`) |
+| `multiplex.json` | Parameter validation rules and `defaults` preset for multiplex (mirrors benchmark `multiplex.json`) |
 
 ## Conventions
 - Primary branch is `main`

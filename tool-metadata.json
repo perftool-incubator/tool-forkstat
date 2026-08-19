@@ -1,0 +1,19 @@
+{
+  "rickshaw-tool-metadata": {
+    "schema": {
+      "version": "2026.08.11"
+    }
+  },
+  "tool": "forkstat",
+  "description": "Monitors process lifecycle events (fork, exec, exit, clone, and others) via the upstream 'forkstat' utility. fork/exec/exit/clone events are parsed into per-interval CDM throughput metrics; other configurable event types (core, comm, ptrce, uid, sid, nonzeroexit) are captured in the raw log only.",
+  "cdm_indexed": true,
+  "cdm_sources": [
+    {
+      "source": "forkstat",
+      "types": ["fork", "exec", "exit", "clone"]
+    }
+  ],
+  "output_files": [
+    "forkstat-stderrout.txt.xz"
+  ]
+}

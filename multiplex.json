@@ -1,0 +1,14 @@
+{
+    "presets": {
+        "defaults" : [
+            { "arg": "events", "vals": ["all"] }
+        ]
+    },
+    "validations": {
+        "event_list" : {
+            "description" : "a comma-separated list of forkstat event types to monitor (fork/exec/exit/core/comm/clone/ptrce/uid/sid/nonzeroexit), or 'all'",
+            "args" : [ "events" ],
+            "vals": "^(all|(fork|exec|exit|core|comm|clone|ptrce|uid|sid|nonzeroexit)(,(fork|exec|exit|core|comm|clone|ptrce|uid|sid|nonzeroexit))*)$"
+        }
+    }
+}
