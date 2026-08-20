@@ -1,7 +1,7 @@
 # tool-forkstat
 [![CI Actions Status](https://github.com/perftool-incubator/tool-forkstat/workflows/crucible-ci/badge.svg)](https://github.com/perftool-incubator/tool-forkstat/actions)
 
-Monitors process fork(), exec(), and exit() activity during benchmark execution for the [crucible](https://github.com/perftool-incubator/crucible) performance testing framework, using the upstream [forkstat](https://github.com/ColinIanKing/forkstat) utility.
+Monitors process fork(), exec(), exit(), and clone() activity during benchmark execution for the [crucible](https://github.com/perftool-incubator/crucible) performance testing framework, using the upstream [forkstat](https://github.com/ColinIanKing/forkstat) utility.
 
 ## Configuration
 
