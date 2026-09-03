@@ -22,20 +22,20 @@ else:
         print("ERROR: <TOOLBOX_HOME>/python ('%s') does not exist!" % (p))
         exit(2)
     sys.path.append(str(p))
-from toolbox.metrics import log_sample
-from toolbox.metrics import finish_samples
+from toolbox.cdm_metrics import CDMMetrics
 
 event_types = ('fork', 'exec', 'exit', 'clone')
 event_pattern = re.compile(r'^(\d{2}:\d{2}:\d{2})\s+(' + '|'.join(event_types) + r')\s+')
 
-def emit_samples(file_id, end_ts, counts):
+def emit_samples(metrics, file_id, end_ts, counts):
     for event_type, count in counts.items():
         desc = {'source': 'forkstat', 'type': event_type, 'class': 'throughput'}
         sample = {'end': end_ts, 'value': count}
-        log_sample(file_id, desc, {}, sample)
+        metrics.log_sample(file_id, desc, {}, sample)
 
 def main():
     print('forkstat-post-process')
+    metrics = CDMMetrics()
 
     date_file = 'forkstat-date.txt'
     if not os.path.exists(date_file):
@@ -77,16 +77,16 @@ def main():
             end_ts = int(math.floor(dt.timestamp() * 1000))
 
             if current_ts is not None and end_ts != current_ts:
-                emit_samples(file_id, current_ts, counts)
+                emit_samples(metrics, file_id, current_ts, counts)
                 counts = {}
 
             current_ts = end_ts
             counts[event_type] = counts.get(event_type, 0) + 1
 
     if current_ts is not None and counts:
-        emit_samples(file_id, current_ts, counts)
+        emit_samples(metrics, file_id, current_ts, counts)
 
-    finish_samples()
+    metrics.finish_samples()
     return 0
 
 if __name__ == "__main__":
