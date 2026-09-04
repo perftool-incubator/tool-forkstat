@@ -10,4 +10,4 @@ The start script accepts one parameter:
 
 ## Integration
 
-Forkstat runs as a profiler tool on endpoint nodes. It is allowed on master and worker collector roles but blocked on client and server roles. The post-processor (`forkstat-post-process`) converts raw forkstat output into crucible metrics.
+Forkstat runs as a profiler tool on endpoint nodes. It is allowed on master and worker collector roles but blocked on client and server roles. The post-processor (`forkstat-post-process.py`) converts raw forkstat output into crucible metrics.
